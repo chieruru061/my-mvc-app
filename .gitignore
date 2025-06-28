@@ -1,0 +1,37 @@
+# ビルド生成物を除外
+bin/
+obj/
+*.dll
+*.exe
+
+# NuGetパッケージのゴミ
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# ユーザー固有の設定
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio関連
+.vs/
+.vscode/
+*.user
+*.suo
+
+# 一時的なログやファイル
+*.log
+*.tmp
+*.bak
+
+# OS依存のファイル
+Thumbs.db
+ehthumbs.db
+.DS_Store
+
+
+test.db
