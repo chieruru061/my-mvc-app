@@ -33,4 +33,5 @@ Thumbs.db
 ehthumbs.db
 .DS_Store
 
-
+# DBファイルは含めない
+*.db
