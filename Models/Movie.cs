@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SampleMVCApp.Models;
 
@@ -14,5 +15,6 @@ public class Movie
     [Display(Name = "ジャンル")]
     public string? Genre { get; set; }
     [Display(Name = "値段")]
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal Price { get; set; }
 }

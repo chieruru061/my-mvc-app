@@ -65,6 +65,8 @@ namespace SampleMVCApp.Controllers
             return View(movie);
         }
 
+        // アクションメソッドはGETリクエストとPOSTリクエストが２つ同じ名前で用意される。
+
         // GET: Movies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -93,11 +95,13 @@ namespace SampleMVCApp.Controllers
                 return NotFound();
             }
 
+            // ModelStete.IsValid はフォームで送信されたデータを使ってMovideオブジェクトを変更できること検証
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(movie);
+                    // DBに変更を保存
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
