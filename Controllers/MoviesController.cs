@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using SampleMVCApp.Data;
 using SampleMVCApp.Models;
+using SampleMVCApp.Data;
 
 namespace SampleMVCApp.Controllers
 {
@@ -21,13 +21,17 @@ namespace SampleMVCApp.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
             if (_context.Movie == null)
             {
                 return Problem("Entity set 'MvcMovieContext.Movie' is null.");
             }
 
+            // Use LINQ to get list of genre.
+            IQueryable<string> genreQuery = from m in _context.Movie
+                                            orderby m.Genre
+                                            select m.Genre;
             var movies = from m in _context.Movie
                          select m;
 
@@ -36,8 +40,21 @@ namespace SampleMVCApp.Controllers
                 // 大文字に変換
                 movies = movies.Where(s => s.Title!.ToUpper().Contains(searchString.ToUpper()));
             }
-            // ToListAsync()を呼び出すと、LINQの式が評価される。
-            return View(await movies.ToListAsync());
+
+            if (!String.IsNullOrEmpty(movieGenre))
+            {
+                movies = movies.Where(x => x.Genre == movieGenre);
+            }
+
+            // プロパティの初期化
+            var movieGenreVM = new MovieGenreViewModel
+            {
+                // ToListAsync()を呼び出すと、LINQの式が評価される。
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Movies = await movies.ToListAsync()
+            };
+            
+            return View(movieGenreVM);
         }
 
         [HttpPost]
