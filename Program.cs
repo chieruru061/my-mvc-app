@@ -48,7 +48,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     // 一番目のURLセグメントでは、実行するコントローラークラスが決定される。 localhost:0000/HelloWorld -> HelloWorldController
-    // URL セグメントの 2 番目の部分では、クラスのアクション メソッドが決定される。 指定しない場合は、indexメソッドが設定される。　localhost:5001/HelloWorld/Inde
+    // URL セグメントの 2 番目の部分では、クラスのアクション メソッドが決定される。 指定しない場合は、indexメソッドが設定される。　localhost:5001/HelloWorld/Index
     // 3番目のセグメントはメソッドの引数がパラメータとして設定される。
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
