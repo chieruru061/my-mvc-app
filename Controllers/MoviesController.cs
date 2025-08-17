@@ -134,6 +134,8 @@ namespace SampleMVCApp.Controllers
             }
 
             // ModelStete.IsValid はフォームで送信されたデータを使ってMovideオブジェクトを変更できること検証
+            // Modelに定義されたバリデーションを一括で判定してくれる。←神
+            // Model側に検証属性を追加することで、検証ロジックが一括管理され、DRY原則を維持することができる
             if (ModelState.IsValid)
             {
                 try
